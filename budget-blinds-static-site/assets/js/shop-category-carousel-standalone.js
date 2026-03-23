@@ -2,6 +2,8 @@
  * Shop category card carousel – standalone (works without bundler).
  * Powers image slider + dots + arrows on each category card.
  * Includes one-time swipe-nudge hint when a card with 2+ images first enters view.
+ * Places the consultation block beside the last card only when that row has one card;
+ * otherwise the consultation stays full width on the following row (CSS default).
  */
 (function() {
   var STORAGE_INTERACTED = 'shopCategoryCarouselInteracted';
@@ -118,7 +120,181 @@
     });
 
     initSwipeNudge();
+    initConsultationLayout();
   }
+
+  function getShopCategoryColumnCount() {
+    if (window.matchMedia && window.matchMedia('(max-width: 1029px)').matches) return 1;
+    if (window.matchMedia && window.matchMedia('(max-width: 1200px)').matches) return 2;
+    var g = document.querySelector('.shop-category__grid');
+    if (!g) return 3;
+    return g.getAttribute('data-view') === 'small' ? 5 : 3;
+  }
+
+  function snapRowTop(t) {
+    return Math.round(t / 8) * 8;
+  }
+
+  function rowTopsAligned(a, b) {
+    var t1 = a.getBoundingClientRect().top;
+    var t2 = b.getBoundingClientRect().top;
+    return Math.abs(t1 - t2) < 3;
+  }
+
+  function findGridRowMatchingLast(grid, consultation, last, maxProbe) {
+    var cap = maxProbe || 80;
+    for (var r = 1; r <= cap; r++) {
+      consultation.style.gridRow = r + ' / ' + (r + 1);
+      grid.offsetHeight;
+      if (rowTopsAligned(consultation, last)) {
+        return r + ' / ' + (r + 1);
+      }
+    }
+    consultation.style.gridRow = '';
+    return '';
+  }
+
+  /**
+   * If the bottom-most row of product cards has exactly one card, pin that card
+   * to column 1 and place the consultation in columns 2–end on the same row.
+   * If that row has two or more cards, clear inline placement so the consultation
+   * is full width on the following row (CSS default).
+   */
+  function layoutShopCategoryConsultation() {
+    var grid = document.querySelector('.shop-category__grid');
+    var consultation = grid && grid.querySelector('.shop-category__consultation');
+    var cardNodes = grid && grid.querySelectorAll('.shop-category__card');
+    if (!grid || !consultation || !cardNodes.length) return;
+
+    function clear() {
+      grid.removeAttribute('data-consultation-placement');
+      consultation.style.gridColumn = '';
+      consultation.style.gridRow = '';
+      consultation.style.gridRowStart = '';
+      consultation.style.gridRowEnd = '';
+      var resetCards = grid.querySelectorAll('.shop-category__card');
+      for (var x = 0; x < resetCards.length; x++) {
+        resetCards[x].style.gridColumn = '';
+        resetCards[x].style.gridRow = '';
+        resetCards[x].style.gridRowStart = '';
+        resetCards[x].style.gridRowEnd = '';
+      }
+    }
+
+    clear();
+    if (getShopCategoryColumnCount() < 2) {
+      return;
+    }
+
+    grid.offsetHeight;
+
+    var cards = Array.prototype.slice.call(cardNodes);
+    var snaps = cards.map(function(c) {
+      return { el: c, snap: snapRowTop(c.getBoundingClientRect().top) };
+    });
+    var maxSnap = -Infinity;
+    for (var i = 0; i < snaps.length; i++) {
+      if (snaps[i].snap > maxSnap) maxSnap = snaps[i].snap;
+    }
+    var lastRow = [];
+    for (var j = 0; j < snaps.length; j++) {
+      if (snaps[j].snap === maxSnap) lastRow.push(snaps[j].el);
+    }
+
+    if (lastRow.length !== 1) {
+      return;
+    }
+
+    var last = lastRow[0];
+    var cs = window.getComputedStyle(last);
+    var rowStr = '';
+    if (cs.gridRow && cs.gridRow.trim() !== 'auto' && cs.gridRow.trim() !== 'auto / auto') {
+      rowStr = cs.gridRow.trim();
+    } else if (cs.gridRowStart && cs.gridRowStart !== 'auto') {
+      rowStr =
+        cs.gridRowStart +
+        ' / ' +
+        (cs.gridRowEnd && cs.gridRowEnd !== 'auto' ? cs.gridRowEnd : 'span 1');
+    }
+
+    if (rowStr) {
+      last.style.gridRow = rowStr;
+    }
+    last.style.gridColumn = '1 / 2';
+    grid.offsetHeight;
+
+    grid.setAttribute('data-consultation-placement', 'inline');
+    consultation.style.gridColumn = '2 / -1';
+
+    function tryRowShorthand(shorthand) {
+      if (!shorthand) return false;
+      consultation.style.gridRow = shorthand;
+      grid.offsetHeight;
+      return rowTopsAligned(consultation, last);
+    }
+
+    var csLast = window.getComputedStyle(last);
+    var gr = csLast.gridRow ? csLast.gridRow.trim() : '';
+    var placed =
+      (gr && gr !== 'auto' && gr !== 'auto / auto' && tryRowShorthand(gr)) ||
+      (csLast.gridRowStart &&
+        csLast.gridRowStart !== 'auto' &&
+        tryRowShorthand(
+          csLast.gridRowStart +
+            ' / ' +
+            (csLast.gridRowEnd && csLast.gridRowEnd !== 'auto' ? csLast.gridRowEnd : 'span 1')
+        ));
+
+    if (!placed) {
+      var found = findGridRowMatchingLast(grid, consultation, last, cards.length + 24);
+      if (found) {
+        consultation.style.gridRow = found;
+      } else {
+        clear();
+      }
+    }
+  }
+
+  function scheduleConsultationLayout() {
+    requestAnimationFrame(function() {
+      requestAnimationFrame(layoutShopCategoryConsultation);
+    });
+  }
+
+  function initConsultationLayout() {
+    scheduleConsultationLayout();
+    var grid = document.querySelector('.shop-category__grid');
+    if (grid && typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(function() {
+        scheduleConsultationLayout();
+      }).observe(grid);
+    }
+    window.addEventListener('resize', function() {
+      scheduleConsultationLayout();
+    });
+    window.addEventListener('load', function() {
+      scheduleConsultationLayout();
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() {
+        scheduleConsultationLayout();
+      });
+    }
+    var imgs = grid ? grid.querySelectorAll('img') : [];
+    for (var k = 0; k < imgs.length; k++) {
+      if (!imgs[k].complete) {
+        imgs[k].addEventListener('load', function() {
+          scheduleConsultationLayout();
+        }, { once: true });
+      }
+    }
+    setTimeout(function() {
+      scheduleConsultationLayout();
+    }, 300);
+  }
+
+  window.layoutShopCategoryConsultation = layoutShopCategoryConsultation;
+  window.scheduleShopCategoryConsultationLayout = scheduleConsultationLayout;
 
   function initSwipeNudge() {
     try {

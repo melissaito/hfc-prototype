@@ -22,7 +22,11 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 { font-size: var(--h1-size); line-height: var(--lh-tight); }
-h2 { font-size: var(--h2-size); line-height: var(--lh-tight); }
+h2 {
+  font-size: var(--h2-size);
+  line-height: var(--lh-tight);
+  font-weight: var(--weight-normal);
+}
 h3 { font-size: var(--h3-size); line-height: var(--lh-normal); }
 h4 { font-size: var(--h4-size); line-height: var(--lh-normal); }
 h5 { font-size: var(--h5-size); line-height: var(--lh-normal); }

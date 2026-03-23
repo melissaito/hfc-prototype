@@ -21,7 +21,7 @@
     .lifestyle-gallery__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
       font-size: var(--h2-size);
-      font-weight: 400;
+      font-weight: var(--weight-normal);
       color: var(--color-headline, var(--utility-grey-800));
       text-align: center;
       margin: 0 0 1.5rem;
@@ -257,11 +257,11 @@
     .pricing-module__heading { text-align: center; margin-bottom: 2rem; }
     .pricing-module__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
+      font-size: var(--h2-size);
+      font-weight: var(--weight-normal);
       color: var(--color-headline, var(--utility-grey-800));
       margin: 0 0 1rem;
-      line-height: 1.2;
+      line-height: var(--lh-tight);
     }
     .pricing-module__intro {
       font-size: 1.1rem;
@@ -447,11 +447,11 @@
     }
     .why-choose__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 700;
+      font-size: var(--h2-size);
+      font-weight: var(--weight-normal);
       color: var(--color-headline, var(--utility-grey-800));
       margin: 0 0 0.5rem;
-      line-height: 1.2;
+      line-height: var(--lh-tight);
     }
     .why-choose__intro {
       font-size: 1.1rem;
@@ -512,8 +512,7 @@
       object-fit: cover;
       display: block;
     }
-    .why-choose__col-title,
-    .faq-accordion__title {
+    .why-choose__col-title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
     }
     .why-choose__col-title {
@@ -604,8 +603,8 @@
     }
     .feature-hero-intro__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 700;
+      font-size: var(--h2-size);
+      font-weight: var(--weight-normal);
       color: var(--color-headline);
       margin: 0 0 1rem;
       line-height: var(--lh-tight);
@@ -729,7 +728,7 @@
     <div class="container">
       <header class="shop-category__header">
         <div class="shop-category__intro">
-          <h2 id="shop-category-heading" class="shop-category__title">Explore by Category</h2>
+          <h2 id="shop-category-heading" class="shop-category__title">Shop by Category</h2>
           <p class="shop-category__description">Browse our most popular custom blinds, from door and window blinds to smart, motorized solutions designed to simplify everyday living.</p>
         </div>
         <div class="shop-category__toggles" role="group" aria-label="View size">
@@ -815,7 +814,6 @@
           <div class="card__image shop-category__card-image">
             <div class="shop-category__card-carousel">
               <div class="shop-category__card-carousel-inner">
-                <video class="shop-category__card-video" src="assets/images/blinds/grid-images/motorized-blinds/blinds-motorized-1.webm" autoplay muted loop playsinline poster="assets/images/blinds/grid-images/motorized-blinds/motorized-1.png" width="400" height="280" aria-label="Motorized blinds in motion"></video>
                 <img src="assets/images/blinds/grid-images/motorized-blinds/motorized-1.png" alt="Motorized blinds" loading="lazy" width="400" height="280">
                 <img src="assets/images/blinds/grid-images/motorized-blinds/motorized-2.png" alt="Motorized blinds view 2" loading="lazy" width="400" height="280">
               </div>
@@ -859,19 +857,6 @@
             <p class="shop-category__card-desc">A clean, streamlined solution for sliding glass doors and large windows, vertical blinds offer smooth operation and effortless light control.</p>
           </div>
         </a>
-        <div class="shop-category__consultation">
-          <div class="shop-category__consultation-inner">
-            <h3 class="shop-category__consultation-title">Get Started with a Free In Home Consultation</h3>
-            <p class="shop-category__consultation-text">Blandit faucibus amet nec laoreet quam ornare tincidunt nisl. Amet suspendisse feugiat.</p>
-            <a href="index.html#consultation" class="btn shop-category__consultation-btn">
-              Request a Free Consultation
-              <img src="assets/images/Icons-rightarrow-carat.svg" alt="" class="btn__icon">
-            </a>
-          </div>
-          <div class="shop-category__consultation-image">
-            <img src="assets/images/consultation.png" alt="Consultation with Budget Blinds specialist" width="400" height="400" loading="lazy">
-          </div>
-        </div>
         <a href="#panel-track" class="shop-category__card card">
           <div class="card__image shop-category__card-image">
             <div class="shop-category__card-carousel">
@@ -908,8 +893,7 @@
           <div class="card__image shop-category__card-image">
             <div class="shop-category__card-carousel">
               <div class="shop-category__card-carousel-inner">
-                <img src="assets/images/blinds/grid-images/door-blinds/door-1.png" alt="Blinds on a door" loading="lazy" width="400" height="280">
-                <img src="assets/images/blinds/grid-images/door-blinds/door-2.png" alt="Door blinds view 2" loading="lazy" width="400" height="280">
+                <img src="assets/images/blinds/grid-images/door-blinds/door-2.png" alt="Blinds on a door" loading="lazy" width="400" height="280">
                 <img src="assets/images/blinds/grid-images/door-blinds/door-3.png" alt="Door blinds alternate" loading="lazy" width="400" height="280">
               </div>
             </div>
@@ -920,6 +904,19 @@
             <p class="shop-category__card-desc">Maintain privacy without sacrificing light or functionality with blinds designed specifically for doors and everyday use.</p>
           </div>
         </a>
+        <div class="shop-category__consultation">
+          <div class="shop-category__consultation-inner">
+            <h3 class="shop-category__consultation-title">Get Started with a Free In Home Consultation</h3>
+            <p class="shop-category__consultation-text">Blandit faucibus amet nec laoreet quam ornare tincidunt nisl. Amet suspendisse feugiat.</p>
+            <a href="index.html#consultation" class="btn shop-category__consultation-btn">
+              Request a Free Consultation
+              <img src="assets/images/Icons-rightarrow-carat.svg" alt="" class="btn__icon">
+            </a>
+          </div>
+          <div class="shop-category__consultation-image">
+            <img src="assets/images/consultation.png" alt="Consultation with Budget Blinds specialist" width="400" height="400" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -967,7 +964,7 @@
               <td class="comparison__td comparison__td--other"><img src="assets/images/close-circle.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
             </tr>
             <tr>
-              <td class="comparison__td comparison__td--feature"><a href="#warranty" class="text-cta-link">No Questions Asked Warranty</a></td>
+              <td class="comparison__td comparison__td--feature"><a href="#warranty" class="text-cta-link">No-Questions-Asked Warranty</a></td>
               <td class="comparison__td comparison__td--bb"><img src="assets/images/Check-blue.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
               <td class="comparison__td comparison__td--other"><img src="assets/images/close-circle.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
               <td class="comparison__td comparison__td--other"><img src="assets/images/close-circle.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
@@ -985,7 +982,7 @@
               <td class="comparison__td comparison__td--other"><img src="assets/images/Check-grey.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
             </tr>
             <tr>
-              <td class="comparison__td comparison__td--feature">Direct Communication with Franchise Operator</td>
+              <td class="comparison__td comparison__td--feature">Direct Communication with Local Owner</td>
               <td class="comparison__td comparison__td--bb"><img src="assets/images/Check-blue.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
               <td class="comparison__td comparison__td--other"><img src="assets/images/Check-grey.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
               <td class="comparison__td comparison__td--other"><img src="assets/images/close-circle.svg" alt="" class="comparison__icon-img" width="24" height="24"></td>
@@ -1271,11 +1268,11 @@
     }
     .trust-badges__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
-      font-size: clamp(1.75rem, 4.5vw, 3rem);
-      font-weight: 400;
-      color: #497B94;
+      font-size: var(--h2-size);
+      font-weight: var(--weight-normal);
+      color: var(--color-headline);
       margin: 0 0 0.75rem;
-      line-height: 1.2;
+      line-height: var(--lh-tight);
     }
     .trust-badges__subhead {
       font-size: clamp(1rem, 2vw, 1.125rem);
@@ -1413,7 +1410,7 @@
     <div class="trust-badges__inner">
       <div class="trust-badges__headline">
         <h2 id="trust-badges-heading" class="trust-badges__title">Ready to See How Beautiful Blinds Can Be?</h2>
-        <p class="trust-badges__subhead">From consultation to final install, we make it simple and stress-free.</p>
+        <p class="trust-badges__subhead">From consultation to final installation, we make it simple and stress-free.</p>
       </div>
       <a href="index.html#consultation" class="btn trust-badges__cta">
         Schedule a Free Consultation
@@ -1422,28 +1419,28 @@
       <ul class="trust-badges__grid" aria-label="Trust badges">
         <li class="trust-badges__card">
           <div class="trust-badges__badge-img-wrap">
-            <img src="assets/images/blinds/badges/30years.png" alt="30 years of service" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+            <img src="assets/images/blinds/badges/30-years-resized.png" alt="30 years of service" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
           </div>
           <h3 class="trust-badges__card-title">30 Years of Service</h3>
           <p class="trust-badges__card-desc">With more than 30 years of experience in custom window treatments, Budget Blinds combines design expertise with a commitment to exceptional service.</p>
         </li>
         <li class="trust-badges__card">
           <div class="trust-badges__badge-img-wrap">
-            <img src="assets/images/blinds/badges/local.png" alt="Locally owned and operated" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+            <img src="assets/images/blinds/badges/locally-owned-resized.png" alt="Locally owned and operated" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
           </div>
           <h3 class="trust-badges__card-title">Locally Owned and Operated</h3>
           <p class="trust-badges__card-desc">Your local Budget Blinds team brings personalized design expertise directly to your home. We take the time to understand your style, your space, and how you live.</p>
         </li>
         <li class="trust-badges__card">
           <div class="trust-badges__badge-img-wrap">
-            <img src="assets/images/blinds/badges/nationwide.png" alt="Nationwide trust" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+            <img src="assets/images/blinds/badges/nationwide-trust.png" alt="Nationwide trust" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
           </div>
           <h3 class="trust-badges__card-title">Nationwide Trust</h3>
           <p class="trust-badges__card-desc">Local design expertise, personalized service, and the support of a nationally recognized brand bring together the best of both worlds for your home.</p>
         </li>
         <li class="trust-badges__card">
           <div class="trust-badges__badge-img-wrap">
-            <img src="assets/images/blinds/badges/warranty.png" alt="No-questions-asked warranty" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+            <img src="assets/images/blinds/badges/warranty-resized.png" alt="No-questions-asked warranty" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
           </div>
           <h3 class="trust-badges__card-title">No-Questions-Asked Warranty</h3>
           <p class="trust-badges__card-desc">Enjoy added peace of mind with our exclusive warranty, included at no additional cost on most new window treatments. Learn more about our warranty.</p>
@@ -1454,7 +1451,7 @@
           <div class="trust-badges__slide">
             <div class="trust-badges__card">
               <div class="trust-badges__badge-img-wrap">
-                <img src="assets/images/blinds/badges/30years.png" alt="30 years of service" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+                <img src="assets/images/blinds/badges/30-years-resized.png" alt="30 years of service" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
               </div>
               <h3 class="trust-badges__card-title">30 Years of Service</h3>
               <p class="trust-badges__card-desc">With more than 30 years of experience in custom window treatments, Budget Blinds combines design expertise with a commitment to exceptional service.</p>
@@ -1463,7 +1460,7 @@
           <div class="trust-badges__slide">
             <div class="trust-badges__card">
               <div class="trust-badges__badge-img-wrap">
-                <img src="assets/images/blinds/badges/local.png" alt="Locally owned and operated" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+                <img src="assets/images/blinds/badges/locally-owned-resized.png" alt="Locally owned and operated" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
               </div>
               <h3 class="trust-badges__card-title">Locally Owned and Operated</h3>
               <p class="trust-badges__card-desc">Your local Budget Blinds team brings personalized design expertise directly to your home. We take the time to understand your style, your space, and how you live.</p>
@@ -1472,7 +1469,7 @@
           <div class="trust-badges__slide">
             <div class="trust-badges__card">
               <div class="trust-badges__badge-img-wrap">
-                <img src="assets/images/blinds/badges/nationwide.png" alt="Nationwide trust" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+                <img src="assets/images/blinds/badges/nationwide-trust.png" alt="Nationwide trust" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
               </div>
               <h3 class="trust-badges__card-title">Nationwide Trust</h3>
               <p class="trust-badges__card-desc">Local design expertise, personalized service, and the support of a nationally recognized brand bring together the best of both worlds for your home.</p>
@@ -1481,7 +1478,7 @@
           <div class="trust-badges__slide">
             <div class="trust-badges__card">
               <div class="trust-badges__badge-img-wrap">
-                <img src="assets/images/blinds/badges/warranty.png" alt="No-questions-asked warranty" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
+                <img src="assets/images/blinds/badges/warranty-resized.png" alt="No-questions-asked warranty" class="trust-badges__badge-img" width="148" height="148" loading="lazy">
               </div>
               <h3 class="trust-badges__card-title">No-Questions-Asked Warranty</h3>
               <p class="trust-badges__card-desc">Enjoy added peace of mind with our exclusive warranty, included at no additional cost on most new window treatments. Learn more about our warranty.</p>
@@ -1511,12 +1508,12 @@
     }
     .faq-accordion__title {
       font-family: var(--font-display, 'DM Serif Text', Georgia, serif);
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      color: #2a6475;
+      font-size: var(--h2-size);
+      font-weight: var(--weight-normal);
+      color: var(--color-headline);
       text-align: center;
       margin: 0 0 2.5rem;
-      line-height: 1.2;
+      line-height: var(--lh-tight);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease-out, transform 0.5s ease-out;
@@ -2263,6 +2260,9 @@
               b.classList.toggle('is-active', isActive);
               b.setAttribute('aria-pressed', isActive);
             });
+            if (typeof window.scheduleShopCategoryConsultationLayout === 'function') {
+              window.scheduleShopCategoryConsultationLayout();
+            }
           });
         });
       }
